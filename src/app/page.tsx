@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <header className="flex justify-between items-center p-4">
-        <h1 className="text-2xl font-bold">Dome's Domain</h1>
+        <h1 className="text-2xl font-bold">Dome&apos;s Domain</h1>
         <Link href="/auth/login" className="text-blue-600 hover:underline">
           Login
         </Link>

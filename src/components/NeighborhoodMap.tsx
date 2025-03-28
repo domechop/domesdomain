@@ -11,6 +11,16 @@ interface NeighborhoodMapProps {
   state?: string;
 }
 
+interface MapboxContext {
+  id: string;
+  text: string;
+}
+
+interface MapboxFeature {
+  center: [number, number];
+  context?: MapboxContext[];
+}
+
 export default function NeighborhoodMap({ neighborhoodName, address, city, state }: NeighborhoodMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -92,9 +102,9 @@ export default function NeighborhoodMap({ neighborhoodName, address, city, state
 
         if (data.features && data.features.length > 0) {
           // Find the most relevant result
-          const relevantFeature = data.features.find((feature: any) => {
-            const featureCity = feature.context?.find((ctx: any) => ctx.id.includes('place'))?.text;
-            const featureState = feature.context?.find((ctx: any) => ctx.id.includes('region'))?.text;
+          const relevantFeature = data.features.find((feature: MapboxFeature) => {
+            const featureCity = feature.context?.find((ctx: MapboxContext) => ctx.id.includes('place'))?.text;
+            const featureState = feature.context?.find((ctx: MapboxContext) => ctx.id.includes('region'))?.text;
             return featureCity?.toLowerCase() === city?.toLowerCase() && 
                    featureState?.toLowerCase() === state?.toLowerCase();
           }) || data.features[0];
