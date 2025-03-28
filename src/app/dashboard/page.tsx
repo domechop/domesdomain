@@ -93,13 +93,13 @@ export default function DashboardPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
-            Welcome to {profile?.neighborhood_name || "'your neighborhood'"}
+            Welcome to {profile?.neighborhood_name || "your neighborhood"}
           </h1>
           <HamburgerMenu />
         </div>
         <div className="px-4 py-6 sm:px-0">
           <p className="mt-2 text-gray-600">
-            You're now connected to your local community!
+            {"You're now connected to your local community!"}
           </p>
         </div>
 

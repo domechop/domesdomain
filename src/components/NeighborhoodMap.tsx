@@ -25,7 +25,6 @@ export default function NeighborhoodMap({ neighborhoodName, address, city, state
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
 
   // Function to get user's current location
   const getUserLocation = () => {

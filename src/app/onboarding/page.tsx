@@ -151,7 +151,7 @@ export default function OnboardingPage() {
           Welcome to your neighborhood
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Let&apos;s get to know your community better
+          {"Let's get to know your community better"}
         </p>
       </div>
 

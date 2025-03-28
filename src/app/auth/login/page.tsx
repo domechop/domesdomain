@@ -8,6 +8,11 @@ interface AuthError extends Error {
   message: string;
 }
 
+interface SupabaseError extends Error {
+  message: string;
+  status?: number;
+}
+
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,6 +43,7 @@ export default function LoginPage() {
       router.push('/onboarding');
     } catch (error: unknown) {
       if (error instanceof Error) {
+        console.error('Authentication error:', error);
         setError(error.message || 'An error occurred during authentication');
       } else {
         setError('An unexpected error occurred');
