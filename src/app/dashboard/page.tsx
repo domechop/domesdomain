@@ -44,9 +44,13 @@ export default function DashboardPage() {
 
         console.log('Profile loaded:', data);
         setProfile(data);
-      } catch (error: any) {
-        console.error('Error in loadProfile:', error);
-        setError(error.message || 'Failed to load profile');
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error('Error in loadProfile:', error);
+          setError(error.message || 'Failed to load profile');
+        } else {
+          setError('An unexpected error occurred');
+        }
       } finally {
         setLoading(false);
       }

@@ -32,8 +32,13 @@ export default function LoginPage() {
         if (error) throw error;
       }
       router.push('/onboarding');
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Error in loadProfile:', error);
+        setError(error.message || 'Failed to load profile');
+      } else {
+        setError('An unexpected error occurred');
+      }
     } finally {
       setLoading(false);
     }

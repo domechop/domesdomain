@@ -132,9 +132,13 @@ export default function OnboardingPage() {
 
       console.log('Successfully saved data, redirecting to dashboard...');
       router.push('/dashboard');
-    } catch (error: any) {
-      console.error('Error saving profile:', error);
-      setError(error.message || 'An error occurred while saving your profile');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Error saving profile:', error);
+        setError(error.message || 'An error occurred while saving your profile');
+      } else {
+        setError('An unexpected error occurred');
+      }
     } finally {
       setIsSubmitting(false);
     }

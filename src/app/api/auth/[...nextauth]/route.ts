@@ -12,9 +12,10 @@ const handler = NextAuth({
     signIn: "/auth/login",
   },
   callbacks: {
-    async session({ session, token }) {
+    async session({ session }) {
       return session;
     },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;

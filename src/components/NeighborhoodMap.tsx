@@ -19,45 +19,19 @@ export default function NeighborhoodMap({ neighborhoodName, address, city, state
 
   // Function to get user's current location
   const getUserLocation = () => {
-    if (!navigator.geolocation) {
-      setError('Geolocation is not supported by your browser');
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { longitude, latitude } = position.coords;
-        setUserLocation([longitude, latitude]);
-        
-        // Add user location marker if map is initialized
-        if (map.current) {
-          // Remove existing user location marker if it exists
-          const existingMarker = document.querySelector('.user-location-marker');
-          if (existingMarker) {
-            existingMarker.remove();
-          }
-
-          // Add new user location marker
-          const el = document.createElement('div');
-          el.className = 'user-location-marker';
-          el.style.width = '20px';
-          el.style.height = '20px';
-          el.style.backgroundColor = '#00ff00';
-          el.style.border = '2px solid white';
-          el.style.borderRadius = '50%';
-
-          new mapboxgl.Marker(el)
-            .setLngLat([longitude, latitude])
-            .setPopup(new mapboxgl.Popup({ offset: 25 })
-              .setHTML('<h3 class="font-bold">Your Location</h3>'))
-            .addTo(map.current);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log('User location:', latitude, longitude);
+        },
+        (error) => {
+          console.error('Error getting user location:', error);
         }
-      },
-      (error) => {
-        console.error('Error getting location:', error);
-        setError('Unable to get your location');
-      }
-    );
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
   };
 
   useEffect(() => {
